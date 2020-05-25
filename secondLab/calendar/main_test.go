@@ -14,26 +14,25 @@ type Calendar struct {
 func NewCalendar(parsed time.Time) *Calendar {
 	clndr := Calendar{parsed: parsed}
 	clndr.CurrentQuarter = func() int {
-		var quarter = 0
 		switch clndr.parsed.Month().String() {
 		case "January":
 		case "February":
 		case "March":
-			quarter = 1
+			return 1
 		case "April":
 		case "May":
 		case "June":
-			quarter = 2
+			return 2
 		case "July":
 		case "August":
 		case "September":
-			quarter = 3
+			return 3
 		case "October":
 		case "November":
 		case "December":
-			quarter = 4
+			return 4
 		}
-		return quarter
+		return 0
 	}
 	return &clndr
 }
