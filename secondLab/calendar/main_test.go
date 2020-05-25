@@ -14,25 +14,34 @@ type Calendar struct {
 func NewCalendar(parsed time.Time) *Calendar {
 	clndr := Calendar{parsed: parsed}
 	clndr.CurrentQuarter = func() int {
+		var quarter = 0
 		switch clndr.parsed.Month().String() {
 		case "January":
+			quarter = 1
 		case "February":
+			quarter = 1
 		case "March":
-			return 1
+			quarter = 1
 		case "April":
+			quarter = 2
 		case "May":
+			quarter = 2
 		case "June":
-			return 2
+			quarter = 2
 		case "July":
+			quarter = 3
 		case "August":
+			quarter = 3
 		case "September":
-			return 3
+			quarter = 3
 		case "October":
+			quarter = 4
 		case "November":
+			quarter = 4
 		case "December":
-			return 4
+			quarter = 4
 		}
-		return 0
+		return quarter
 	}
 	return &clndr
 }
@@ -63,9 +72,9 @@ func TestCurrentQuarter(t *testing.T) {
 		calendar := NewCalendar(parsed)
 		actual := calendar.CurrentQuarter()
 		if actual != test.quarter {
-			// t.Error("Month:", test.month,
-			// 	"Expected Quarter:", test.quarter,
-			// 	"Actual Quarter:", actual)
+			t.Error("Month:", test.month,
+				"Expected Quarter:", test.quarter,
+				"Actual Quarter:", actual)
 		}
 	}
 }
